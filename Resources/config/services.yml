@@ -1,0 +1,13 @@
+services:
+
+    carbon:
+        alias: Carbon\Carbon
+
+    Carbon\Carbon:
+        public: true
+
+    mnc_doctrine_carbon.listener:
+        class: MNC\DoctrineCarbonBundle\Doctrine\CarbonDateListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }

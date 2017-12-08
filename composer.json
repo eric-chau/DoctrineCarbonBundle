@@ -1,0 +1,25 @@
+{
+    "name": "mnavarrocarter/doctrine-carbon-bundle",
+    "type": "symfony-bundle",
+    "description": "Automatically fetch your Doctrine DateTimes as Carbon instances in Symfony.",
+    "keywords": ["doctrine", "carbon", "date", "doctrine2", "datetime", "converter"],
+    "homepage": "https://navarrocarter.com/posts/doctrine-carbon-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matías Navarro Carter",
+            "email": "mnavarrocarter@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "symfony/framework-bundle": "~2.1|~3.0",
+        "nesbot/carbon": "^1.22"
+    },
+    "suggested": {
+        "stof/doctrine-extensions-bundle": "^1.2"
+    },
+    "autoload": {
+        "psr-4": { "MNC\\DoctrineCarbonBundle\\": "" }
+    }
+}
