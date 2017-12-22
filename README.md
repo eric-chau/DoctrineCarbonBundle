@@ -46,37 +46,18 @@ in your project.
 
 ### Specifying other properties names
 
-If you have other DateTime fields in your entities that are not the ones mentioned
-above, you can tell MNCDoctrineCarbonBundle to convert them too. Just create a public
-property called `timeFields` in your entity and set it to an array of the property names you want 
-to instantiate as Carbon dates, like this:
+In your config.yml file you can specify the properties to listen to:
 
-    class Post {
+    # app/config/config.yml
     
-        public $timeFields = ['publishedAt'];
+    # ...
+    
+    mnc_doctrine_carbon:
+        properties: ['createdAt', 'editedAt', 'publishedAt'] # Array of property names
         
-        #...
-        
-        /**
-         * @var DateTime
-         */
-        private $publishedAt;
-        
-        #...
-        
-        public function getPublishedAt()
-        {
-            return $this->publishedAt;
-        }
-        
-        public function setPublishedAt(DateTime $publishedAt)
-        {
-            $this->publishedAt = $publishedAt;
-        }
-    }
-
 > Note that you need camelCase getters and setters for the properties you desire to convert in order for
 MNCDoctrineCarbonBundle to do it correctly.
+> Note also that when a property doesn't exist in a class, it's ignored completely and errors are not triggered.
 
 ## What is Carbon?
 Carbon is a library that serves as a wrapper to php's DateTime built-in class, providing

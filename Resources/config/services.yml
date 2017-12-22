@@ -1,13 +1,17 @@
 services:
 
     carbon:
-        alias: Carbon\Carbon
-
-    Carbon\Carbon:
+        class: Carbon\Carbon
         public: true
+        calls:
+            - ['setLocale', ['%carbon.default_locale%']]
 
     mnc_doctrine_carbon.listener:
         class: MNC\DoctrineCarbonBundle\Doctrine\CarbonDateListener
-        autowire: true
+        arguments:
+            - '@carbon'
+            - '@logger'
+            - '%mnc_doctrine_carbon.properties%'
+            - '%mnc_doctrine_carbon.excluded_entities%'
         tags:
             - { name: doctrine.event_subscriber }
