@@ -20,11 +20,6 @@ class CarbonDateListener implements EventSubscriber
     private $carbon;
 
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @var array
      */
     private $properties;
@@ -41,13 +36,11 @@ class CarbonDateListener implements EventSubscriber
      */
     public function __construct(
         Carbon $carbon,
-        LoggerInterface $logger,
         array $properties,
         array $excludedClasses
     )
     {
         $this->carbon = $carbon;
-        $this->logger = $logger;
         $this->properties = $properties;
         $this->exludedClasses = $excludedClasses;
     }
@@ -96,11 +89,8 @@ class CarbonDateListener implements EventSubscriber
             if (method_exists($entity, $setter) && method_exists($entity, $getter)) {
                 if ($entity->{$getter}() instanceof DateTime && $entity->{$getter}() !== null) {
                     $entity->{$setter}($this->carbon::instance($entity->{$getter}()));
-                    $this->logger->debug("Property $property converted to Carbon");
-                    continue;
                 }
             }
-            $this->logger->debug("Property $property NOT converted to Carbon");
         }
     }
 }

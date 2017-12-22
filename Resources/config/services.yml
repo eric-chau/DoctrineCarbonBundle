@@ -10,7 +10,6 @@ services:
         class: MNC\DoctrineCarbonBundle\Doctrine\CarbonDateListener
         arguments:
             - '@carbon'
-            - '@logger'
             - '%mnc_doctrine_carbon.properties%'
             - '%mnc_doctrine_carbon.excluded_entities%'
         tags:
