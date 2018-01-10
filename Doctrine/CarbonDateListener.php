@@ -10,6 +10,8 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\Constraints\Date;
 
 class CarbonDateListener implements EventSubscriber
@@ -83,12 +85,11 @@ class CarbonDateListener implements EventSubscriber
      */
     public function setCarbonInstances($entity)
     {
+        $pa = PropertyAccess::createPropertyAccessor();
         foreach ($this->properties as $property) {
-            $getter = 'get'.ucfirst($property);
-            $setter = 'set'.ucfirst($property);
-            if (method_exists($entity, $setter) && method_exists($entity, $getter)) {
-                if ($entity->{$getter}() instanceof DateTime && $entity->{$getter}() !== null) {
-                    $entity->{$setter}($this->carbon::instance($entity->{$getter}()));
+            if ($pa->isReadable($entity, $property) && $pa->isWritable($entity, $property)) {
+                if ($pa->getValue($entity, $property) instanceof DateTime && $pa->getValue($entity, $property) !== null) {
+                    $pa->setValue($entity, $property, $this->carbon::instance($pa->getValue($entity, $property)));
                 }
             }
         }
