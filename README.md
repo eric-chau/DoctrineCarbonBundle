@@ -59,6 +59,23 @@ In your config.yml file you can specify the properties to listen to:
 MNCDoctrineCarbonBundle to do it correctly.
 > Note also that when a property doesn't exist in a class, it's ignored completely and errors are not triggered.
 
+### Fine Graining
+As from 1.1.0 you can use the special `@Carbon` annotation to convert a single DateTime property into a Carbon instance.
+
+    <?php
+    
+    class Entity {
+    
+        use MNC\DoctrineCarbonBundle\Annotations;
+        
+        /**
+         * @ORM\Column(type="datetime")
+         * @Carbon()
+         */
+        private $publishedAt;
+    
+    }
+
 ## What is Carbon?
 Carbon is a library that serves as a wrapper to php's DateTime built-in class, providing
 an easy-to-use and richly-featured API to make common operations with date and time a trivial
