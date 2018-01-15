@@ -6,11 +6,17 @@ services:
         calls:
             - ['setLocale', ['%carbon.default_locale%']]
 
-    mnc_doctrine_carbon.listener:
-        class: MNC\DoctrineCarbonBundle\Doctrine\CarbonDateListener
+    mnc_doctrine_carbon.carbon_property_listener:
+        class: MNC\DoctrineCarbonBundle\Doctrine\CarbonPropertyListener
         arguments:
             - '@carbon'
             - '%mnc_doctrine_carbon.properties%'
             - '%mnc_doctrine_carbon.excluded_entities%'
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    mnc_doctrine_carbon.doctrine.carbon_annotation_listener:
+        class: MNC\DoctrineCarbonBundle\Doctrine\CarbonAnnotationListener
+        arguments: ['@carbon', '@annotations.reader']
         tags:
             - { name: doctrine.event_subscriber }

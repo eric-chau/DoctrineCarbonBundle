@@ -14,7 +14,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\Constraints\Date;
 
-class CarbonDateListener implements EventSubscriber
+class CarbonPropertyListener implements EventSubscriber
 {
     /**
      * @var Carbon
