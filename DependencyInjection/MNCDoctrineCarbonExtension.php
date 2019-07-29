@@ -23,7 +23,7 @@ class MNCDoctrineCarbonExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('carbon.default_locale',
-            isset($cofig['locale']) ? $config['locale'] : $container->getParameter('locale'));
+            isset($config['locale']) ? $config['locale'] : $container->getParameter('locale'));
 
         $container->setParameter('mnc_doctrine_carbon.properties', $config['properties']);
         $container->setParameter('mnc_doctrine_carbon.excluded_entities', $config['excluded_entities']);
